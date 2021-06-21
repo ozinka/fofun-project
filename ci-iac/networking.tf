@@ -4,14 +4,16 @@ resource "aws_vpc" "fofun-vpc" {
 }
 
 resource "aws_subnet" "fofun-sn1" {
-  vpc_id     = aws_vpc.fofun-vpc.id
-  cidr_block = "10.12.13.0/24"
-  tags       = { Name = "public-fofun-sn" }
+  vpc_id            = aws_vpc.fofun-vpc.id
+  cidr_block        = "10.12.13.0/24"
+  availability_zone = "eu-central-1a"
+  tags              = { Name = "public-fofun-sn" }
 }
 resource "aws_subnet" "fofun-sn2" {
-  vpc_id     = aws_vpc.fofun-vpc.id
-  cidr_block = "10.12.14.0/24"
-  tags       = { Name = "public-fofun-sn" }
+  vpc_id            = aws_vpc.fofun-vpc.id
+  cidr_block        = "10.12.14.0/24"
+  availability_zone = "eu-central-1c"
+  tags              = { Name = "public-fofun-sn" }
 }
 
 resource "aws_default_route_table" "fofun-public-rt" {

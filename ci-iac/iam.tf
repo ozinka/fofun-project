@@ -24,64 +24,15 @@ resource "aws_iam_policy" "ec2_fofun_policy" {
   name        = "ec2_fofun_policy"
   path        = "/"
   description = "This policy provides full S3 access and SSM"
-  policy      = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssm:DescribeAssociation",
-                "ssm:GetDeployablePatchSnapshotForInstance",
-                "ssm:GetDocument",
-                "ssm:DescribeDocument",
-                "ssm:GetManifest",
-                "ssm:GetParameter",
-                "ssm:GetParameters",
-                "ssm:ListAssociations",
-                "ssm:ListInstanceAssociations",
-                "ssm:PutInventory",
-                "ssm:PutComplianceItems",
-                "ssm:PutConfigurePackageResult",
-                "ssm:UpdateAssociationStatus",
-                "ssm:UpdateInstanceAssociationStatus",
-                "ssm:UpdateInstanceInformation"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssmmessages:CreateControlChannel",
-                "ssmmessages:CreateDataChannel",
-                "ssmmessages:OpenControlChannel",
-                "ssmmessages:OpenDataChannel"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2messages:AcknowledgeMessage",
-                "ec2messages:DeleteMessage",
-                "ec2messages:FailMessage",
-                "ec2messages:GetEndpoint",
-                "ec2messages:GetMessages",
-                "ec2messages:SendReply"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-                {
-                    "Effect": "Allow",
-                    "Action": "s3:*",
-                    "Resource": "*"
-                }
-            ]
-        }
-    ]
+  policy      = file("conf/ec2_fofun_policy.json")
 }
-EOF
+
+resource "aws_iam_instance_profile" "fofun-ec2-iam-profile" {
+  name = "fofun-ec2-iam-profile"
+  role = aws_iam_role.ec2-fofun-iam-role.name
+}
+
+resource "aws_iam_role_policy_attachment" "fofun-policy-atch" {
+  policy_arn = aws_iam_policy.ec2_fofun_policy.arn
+  role       = aws_iam_role.ec2-fofun-iam-role.name
 }

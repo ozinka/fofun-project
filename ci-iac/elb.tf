@@ -6,7 +6,7 @@ resource "aws_lb" "fofun-elb" {
   internal           = false
   load_balancer_type = "application"
   subnets            = [aws_subnet.fofun-sn1.id, aws_subnet.fofun-sn2.id]
-  security_groups    = [aws_security_group.elb_fofun_sg.id]
+  security_groups    = [aws_security_group.elb-fofun-sg.id]
 
   tags = {
     Name = "fofun-elb"
@@ -55,6 +55,18 @@ resource "aws_lb_target_group" "web-tg" {
   tags = {
     Name = "web-tg"
   }
+}
+
+resource "aws_lb_target_group_attachment" "jn-tg-atch" {
+  target_group_arn = aws_lb_target_group.jn-tg.arn
+  target_id        = aws_instance.web-server.id
+  port             = 8080
+}
+
+resource "aws_lb_target_group_attachment" "web-tg-atch" {
+  target_group_arn = aws_lb_target_group.web-tg.arn
+  target_id        = aws_instance.web-server.id
+  port             = 80
 }
 
 resource "aws_lb_listener" "fofun-listener-https" {
