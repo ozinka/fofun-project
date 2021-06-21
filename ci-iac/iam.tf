@@ -24,7 +24,9 @@ resource "aws_iam_policy" "ec2_fofun_policy" {
   name        = "ec2_fofun_policy"
   path        = "/"
   description = "This policy provides full S3 access and SSM"
-  policy      = file("conf/ec2_fofun_policy.json")
+  policy = templatefile("conf/ec2_fofun_policy.json", {
+    bucket = aws_s3_bucket.fofun-bucket.bucket
+  })
 }
 
 resource "aws_iam_instance_profile" "fofun-ec2-iam-profile" {
