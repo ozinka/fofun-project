@@ -1,9 +1,6 @@
 resource "aws_iam_role" "ec2-fofun-iam-role" {
-  name = "ec2-fofun-iam-role"
-  tags = {
-    Name = "ec2-fofun-iam-role"
-  }
-
+  name               = "ec2-fofun-iam-role"
+  tags               = { Name = "ec2-fofun-iam-role" }
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
