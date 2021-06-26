@@ -1,22 +1,22 @@
 #---------------------------------------------------
 # EC2 security group
 #---------------------------------------------------
-resource "aws_security_group" "ec2-fofun-sg" {
+resource "aws_security_group" "ec2_fofun_sg" {
   name        = "ec2-fofun-sg"
   description = "HTTP traffic to Web EC2"
-  vpc_id      = aws_vpc.fofun-vpc.id
+  vpc_id      = aws_vpc.fofun_vpc.id
   ingress {
     from_port       = 8080
     protocol        = "tcp"
     to_port         = 8080
-    security_groups = [aws_security_group.elb-fofun-sg.id]
+    security_groups = [aws_security_group.elb_fofun_sg.id]
     description     = "HTTP access to jenkins"
   }
   ingress {
     from_port       = 80
     protocol        = "tcp"
     to_port         = 80
-    security_groups = [aws_security_group.elb-fofun-sg.id]
+    security_groups = [aws_security_group.elb_fofun_sg.id]
     description     = "HTTP access to web"
   }
   egress {
@@ -33,10 +33,10 @@ resource "aws_security_group" "ec2-fofun-sg" {
 #---------------------------------------------------
 # ELB security group
 #---------------------------------------------------
-resource "aws_security_group" "elb-fofun-sg" {
+resource "aws_security_group" "elb_fofun_sg" {
   name        = "elb-fofun-sg"
   description = "HTTP traffic to ELB"
-  vpc_id      = aws_vpc.fofun-vpc.id
+  vpc_id      = aws_vpc.fofun_vpc.id
   ingress {
     from_port   = 443
     protocol    = "tcp"
