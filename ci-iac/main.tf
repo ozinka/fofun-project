@@ -6,15 +6,14 @@ provider "aws" {
   }
 }
 
-
-//provider "aws" {
-//  alias = "oz"
-//  assume_role {
-//    role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
-//    session_name = "SESSION_NAME"
-//    external_id  = "EXTERNAL_ID"
-//  }
-//}
+provider "aws" {
+  alias   = "ozi"
+  region  = "eu-central-1"
+  profile = "fofun"
+  assume_role {
+    role_arn = "arn:aws:iam::122317880364:role/fofun_route53"
+  }
+}
 
 terraform {
   backend "s3" {
