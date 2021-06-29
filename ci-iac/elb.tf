@@ -69,7 +69,7 @@ resource "aws_lb_listener" "fofun_listener_https" {
   load_balancer_arn = aws_lb.fofun_elb.arn
   port              = "443"
   protocol          = "HTTPS"
-  certificate_arn   = "arn:aws:acm:eu-central-1:875450339477:certificate/23f54c60-a800-4d71-80aa-40fc4b8a5898"
+  certificate_arn   = aws_acm_certificate.fofun_ssl.arn
   ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
 
   default_action {
