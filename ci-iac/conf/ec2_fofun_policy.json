@@ -1,20 +1,7 @@
 {
     "Version": "2012-10-17",
     "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssm:DescribeSessions",
-                "ssm:GetConnectionStatus",
-                "ssm:DescribeInstanceProperties",
-                "ssm:StartSession",
-                "ssm:TerminateSession",
-                "ssm:ResumeSession",
-                "ec2:DescribeInstances"
-            ],
-            "Resource": "*"
-        },
-        {
+       {
           "Effect": "Allow",
           "Action": ["s3:ListBucket"],
           "Resource": ["arn:aws:s3:::${bucket}"]
