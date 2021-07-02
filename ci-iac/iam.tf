@@ -35,3 +35,18 @@ resource "aws_iam_role_policy_attachment" "fofun_policy_atch" {
   policy_arn = aws_iam_policy.ec2_fofun_policy.arn
   role       = aws_iam_role.ec2_fofun_iam_role.name
 }
+
+resource "aws_iam_role_policy_attachment" "fofun_policy_atch_ssm" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.ec2_fofun_iam_role.name
+}
+
+//resource "aws_ssm_activation" "ssm_activation" {
+//  name               = "fofun_ssm_activation"
+//  description        = "fofun ssm activation"
+//  iam_role           = aws_iam_role.ec2_fofun_iam_role.id
+//  registration_limit = "5"
+//  depends_on         = [aws_iam_role_policy_attachment.fofun_policy_atch_ssm]
+//}
+
+# Terraform example of SSM policy assignment
