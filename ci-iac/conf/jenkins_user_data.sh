@@ -12,6 +12,7 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 # Install software
+amazon-linux-extras install epel
 yum install java-11-amazon-corretto byobu -y
 
 wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
