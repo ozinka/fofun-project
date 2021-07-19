@@ -9,6 +9,7 @@
         {
           "Effect": "Allow",
           "Action": [
+            "s3:ListObject",
             "s3:PutObject",
             "s3:GetObject",
             "s3:DeleteObject"
